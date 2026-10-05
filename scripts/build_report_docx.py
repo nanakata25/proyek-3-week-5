@@ -39,12 +39,12 @@ for style in doc.styles:
 fig=0;story=[]
 
 def rich(par,text):
-    soup=BeautifulSoup(text,'html.parser')
+    soup=BeautifulSoup(text.replace('<link ','<a ').replace('</link>','</a>'),'html.parser')
     def walk(node,bold=False,italic=False):
         if isinstance(node,NavigableString):
             r=par.add_run(str(node));r.bold=bold;r.italic=italic
         elif node.name=='br':par.add_run().add_break()
-        elif node.name=='link' and node.get('href'):
+        elif node.name=='a' and node.get('href'):
             link=OxmlElement('w:hyperlink')
             link.set(qn('r:id'),par.part.relate_to(node['href'],RELATIONSHIP_TYPE.HYPERLINK,is_external=True))
             r=OxmlElement('w:r');pr=OxmlElement('w:rPr')
