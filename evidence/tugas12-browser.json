@@ -1,0 +1,256 @@
+{
+  "startedAt": "2026-10-05T10:32:27.607Z",
+  "origins": {
+    "t1": "http://127.0.0.1:8001",
+    "t2": "http://127.0.0.1:8002"
+  },
+  "viewport": {
+    "width": 1366,
+    "height": 900
+  },
+  "steps": [
+    {
+      "name": "T1: form login tersedia",
+      "passed": true,
+      "ms": 4156
+    },
+    {
+      "name": "T1: password salah ditolak dengan pesan umum",
+      "passed": true,
+      "ms": 1180
+    },
+    {
+      "name": "T1: login benar membuka dashboard dan mengganti sesi",
+      "passed": true,
+      "ms": 1717,
+      "sessionCookieRotated": true,
+      "sessionCookieHttpOnly": true
+    },
+    {
+      "name": "T1: middleware guest mengalihkan pengguna aktif dari login",
+      "passed": true,
+      "ms": 1183
+    },
+    {
+      "name": "T1: konteks incognito tanpa cookie ditolak dari dashboard",
+      "passed": true,
+      "ms": 1301,
+      "initialCookies": 0,
+      "redirectChain": [
+        "http://127.0.0.1:8001/dashboard",
+        "http://127.0.0.1:8001/login"
+      ]
+    },
+    {
+      "name": "T1: logout mengakhiri akses dashboard",
+      "passed": true,
+      "ms": 2296
+    },
+    {
+      "name": "T1: POST tanpa token CSRF ditolak",
+      "passed": true,
+      "ms": 360,
+      "status": 419,
+      "requestHadToken": false,
+      "requestOrigin": "https://example.invalid"
+    },
+    {
+      "name": "T2: katalog lima produk dari server tersedia",
+      "passed": true,
+      "ms": 206
+    },
+    {
+      "name": "T2: halaman keranjang kosong tanpa login",
+      "passed": true,
+      "ms": 1130
+    },
+    {
+      "name": "T2: dua Buku dan satu Pulpen menghasilkan total Rp13.000",
+      "passed": true,
+      "ms": 2178
+    },
+    {
+      "name": "T2: refresh mempertahankan isi dan total",
+      "passed": true,
+      "ms": 916
+    },
+    {
+      "name": "T2: tab kedua membaca dan menyinkronkan keranjang",
+      "passed": true,
+      "ms": 1113
+    },
+    {
+      "name": "T2: profil atau konteks browser berbeda mempunyai keranjang kosong",
+      "passed": true,
+      "ms": 1078
+    },
+    {
+      "name": "T2: browser ditutup dan diluncurkan ulang mempertahankan data",
+      "passed": true,
+      "ms": 1448,
+      "browserRelaunched": true,
+      "persistentProfile": ".runtime/test-profile-t2",
+      "stored": [
+        {
+          "id": 1,
+          "jumlah": 2
+        },
+        {
+          "id": 2,
+          "jumlah": 1
+        }
+      ]
+    },
+    {
+      "name": "T2: tambah, kurang hingga nol, hapus, dan kosongkan bekerja",
+      "passed": true,
+      "ms": 1824
+    },
+    {
+      "name": "T2: manipulasi jumlah 999 dikoreksi sesuai stok",
+      "passed": true,
+      "ms": 904,
+      "original": [
+        {
+          "id": 1,
+          "jumlah": 999
+        }
+      ],
+      "repaired": [
+        {
+          "id": 1,
+          "jumlah": 40
+        }
+      ],
+      "total": "Rp 200.000"
+    },
+    {
+      "name": "T2: harga dan nama palsu di Local Storage diabaikan",
+      "passed": true,
+      "ms": 824
+    },
+    {
+      "name": "T2: JSON rusak dipulihkan tanpa error JavaScript",
+      "passed": true,
+      "ms": 1699
+    },
+    {
+      "name": "T2: tampilan seluler tidak melampaui lebar viewport",
+      "passed": true,
+      "ms": 1797
+    },
+    {
+      "name": "T1 dan T2: tidak ada uncaught JavaScript error",
+      "passed": true,
+      "ms": 0
+    }
+  ],
+  "screenshots": [
+    {
+      "file": "screenshots/t1-login.png",
+      "url": "http://127.0.0.1:8001/login",
+      "description": "Form login sebelum pengisian.",
+      "capturedAt": "2026-10-05T10:32:32.335Z"
+    },
+    {
+      "file": "screenshots/t1-login-gagal.png",
+      "url": "http://127.0.0.1:8001/login",
+      "description": "Login budi dengan password salah ditolak; password tidak diisi ulang.",
+      "capturedAt": "2026-10-05T10:32:33.515Z"
+    },
+    {
+      "file": "screenshots/t1-login-berhasil.png",
+      "url": "http://127.0.0.1:8001/dashboard",
+      "description": "Dashboard sesudah login berhasil sebagai Budi Santoso.",
+      "capturedAt": "2026-10-05T10:32:35.232Z"
+    },
+    {
+      "file": "screenshots/t1-dashboard.png",
+      "url": "http://127.0.0.1:8001/dashboard",
+      "description": "Dashboard saat pengguna bersesi mengunjungi login dan dialihkan kembali.",
+      "capturedAt": "2026-10-05T10:32:36.415Z"
+    },
+    {
+      "file": "screenshots/t1-incognito-redirect.png",
+      "url": "http://127.0.0.1:8001/login",
+      "description": "Konteks browser incognito baru mengakses dashboard dan diarahkan ke login.",
+      "capturedAt": "2026-10-05T10:32:37.702Z"
+    },
+    {
+      "file": "screenshots/t1-setelah-logout.png",
+      "url": "http://127.0.0.1:8001/login",
+      "description": "Pesan berhasil logout pada form login.",
+      "capturedAt": "2026-10-05T10:32:39.018Z"
+    },
+    {
+      "file": "screenshots/t2-daftar-barang.png",
+      "url": "http://127.0.0.1:8002/",
+      "description": "Katalog lima produk dan stok dari database MySQL.",
+      "capturedAt": "2026-10-05T10:32:44.707Z"
+    },
+    {
+      "file": "screenshots/t2-keranjang-kosong.png",
+      "url": "http://127.0.0.1:8002/keranjang",
+      "description": "Keranjang belum berisi barang dan bisa diakses tanpa akun.",
+      "capturedAt": "2026-10-05T10:32:45.838Z"
+    },
+    {
+      "file": "screenshots/t2-keranjang-terisi.png",
+      "url": "http://127.0.0.1:8002/keranjang",
+      "description": "Buku Tulis dua unit dan Pulpen satu unit: tiga item, total Rp13.000.",
+      "capturedAt": "2026-10-05T10:32:48.016Z"
+    },
+    {
+      "file": "screenshots/t2-setelah-refresh.png",
+      "url": "http://127.0.0.1:8002/keranjang",
+      "description": "Isi dan total tetap sama setelah page.reload pada browser nyata.",
+      "capturedAt": "2026-10-05T10:32:48.932Z"
+    },
+    {
+      "file": "screenshots/t2-tab-kedua.png",
+      "url": "http://127.0.0.1:8002/keranjang",
+      "description": "Tab kedua pada origin sama membaca keranjang dan sinkron antartab teruji.",
+      "capturedAt": "2026-10-05T10:32:50.032Z"
+    },
+    {
+      "file": "screenshots/t2-profil-berbeda.png",
+      "url": "http://127.0.0.1:8002/keranjang",
+      "description": "Konteks browser terisolasi mempunyai Local Storage sendiri dan keranjang kosong.",
+      "capturedAt": "2026-10-05T10:32:51.114Z"
+    },
+    {
+      "file": "screenshots/t2-setelah-browser-dibuka-ulang.png",
+      "url": "http://127.0.0.1:8002/keranjang",
+      "description": "Browser persistent profile ditutup lalu diluncurkan ulang; keranjang tetap ada.",
+      "capturedAt": "2026-10-05T10:32:52.570Z"
+    },
+    {
+      "file": "screenshots/t2-manipulasi-999.png",
+      "url": "http://127.0.0.1:8002/keranjang",
+      "description": "Local Storage diubah menjadi jumlah 999 melalui API browser, kemudian reload membatasi ke stok 40 dengan peringatan.",
+      "capturedAt": "2026-10-05T10:32:55.298Z"
+    },
+    {
+      "file": "screenshots/t2-json-rusak.png",
+      "url": "http://127.0.0.1:8002/keranjang",
+      "description": "JSON keranjang yang rusak dipulihkan ke keranjang kosong dengan pemberitahuan.",
+      "capturedAt": "2026-10-05T10:32:57.005Z"
+    },
+    {
+      "file": "screenshots/t2-katalog-mobile.png",
+      "url": "http://127.0.0.1:8002/",
+      "description": "Katalog pada viewport 390×844 tanpa overflow horizontal.",
+      "capturedAt": "2026-10-05T10:32:58.730Z"
+    },
+    {
+      "file": "screenshots/t2-keranjang-mobile.png",
+      "url": "http://127.0.0.1:8002/keranjang",
+      "description": "Keranjang pada viewport 390×844 tanpa overflow horizontal.",
+      "capturedAt": "2026-10-05T10:32:59.619Z"
+    }
+  ],
+  "consoleErrors": [],
+  "finishedAt": "2026-10-05T10:32:59.962Z",
+  "passed": 20,
+  "failed": 0
+}

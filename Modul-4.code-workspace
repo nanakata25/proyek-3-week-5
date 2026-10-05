@@ -1,0 +1,8 @@
+{
+  "folders": [{ "name": "Modul 4 - Praktikum", "path": "." }],
+  "settings": {
+    "files.exclude": { "**/.runtime": true, "**/tmp": true },
+    "search.exclude": { "**/vendor": true, "**/.runtime": true, "**/tmp": true },
+    "php.validate.executablePath": "C:/Users/Nakata/Documents/Proyek 3/praktikum 4/.runtime/php/php.exe"
+  }
+}

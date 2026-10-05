@@ -1,0 +1,90 @@
+{
+  "date": "2026-10-05T10:34:26.065Z",
+  "steps": [
+    {
+      "name": "E01-02 HTTP stateless",
+      "passed": true,
+      "request2": "Budi",
+      "request3": "tidak diketahui"
+    },
+    {
+      "name": "E03-05 Cookie normal dan redirect",
+      "passed": true,
+      "counter": [
+        1,
+        2,
+        3,
+        4
+      ],
+      "network": [
+        {
+          "method": "POST",
+          "status": 302,
+          "url": "http://127.0.0.1:8004/eksperimen/cookie_dasar.php"
+        },
+        {
+          "method": "GET",
+          "status": 200,
+          "url": "http://127.0.0.1:8004/eksperimen/cookie_dasar.php"
+        }
+      ]
+    },
+    {
+      "name": "E06 Counter sebelum exit",
+      "passed": true,
+      "counter": [
+        1,
+        3,
+        4,
+        6
+      ]
+    },
+    {
+      "name": "E07-08 Keranjang cookie dan 999",
+      "passed": true,
+      "normalTotal": 13000,
+      "tamperedTotal": 4998000
+    },
+    {
+      "name": "E09-12 Session login rotasi dan logout",
+      "passed": true,
+      "sessionIdRotated": true,
+      "logoutCookieRemoved": true,
+      "anonymousRedirect": true
+    },
+    {
+      "name": "E13 Tema setelah refresh",
+      "passed": true,
+      "afterReload": "gelap"
+    },
+    {
+      "name": "E14-15 Keranjang Local Storage",
+      "passed": true,
+      "normalTotal": 13000,
+      "tamperedTotal": 4998000
+    },
+    {
+      "name": "E16 localStorage vs sessionStorage setelah tutup tab",
+      "passed": true,
+      "localPersisted": true,
+      "sessionAfterNewTab": null
+    },
+    {
+      "name": "E17 Skrip origin sama dapat membaca storage",
+      "passed": true,
+      "themeReadable": true
+    }
+  ],
+  "network": [
+    {
+      "method": "POST",
+      "status": 302,
+      "url": "http://127.0.0.1:8004/eksperimen/cookie_dasar.php"
+    },
+    {
+      "method": "GET",
+      "status": 200,
+      "url": "http://127.0.0.1:8004/eksperimen/cookie_dasar.php"
+    }
+  ]
+}

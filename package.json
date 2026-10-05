@@ -1,0 +1,11 @@
+{
+  "name": "modul4-verification",
+  "private": true,
+  "scripts": {
+    "test:cart": "node --test tugas-2-keranjang/tests/cart-store.test.mjs",
+    "test:browser": "node scripts/browser-tugas12.cjs",
+    "test:experiments": "node scripts/browser-eksperimen.cjs",
+    "test:shop": "node scripts/browser-shop.cjs"
+  },
+  "devDependencies": { "playwright": "1.62.1" }
+}

@@ -1,0 +1,121 @@
+{
+    "generated_at": "2026-10-05T17:36:02+07:00",
+    "database_version": "10.4.32-MariaDB",
+    "queries": {
+        "users": {
+            "sql": "SELECT id, username, nama_lengkap, password FROM db_tugas.users ORDER BY id",
+            "rows": [
+                {
+                    "id": 1,
+                    "username": "budi",
+                    "nama_lengkap": "Budi Santoso",
+                    "password": "$2y$12$EfrlTXdJKkDwHREC65t2XOnde6EQIJGgFicJR53xZP3mcNAtZKsmi"
+                },
+                {
+                    "id": 2,
+                    "username": "siti",
+                    "nama_lengkap": "Siti Aminah",
+                    "password": "$2y$12$0sWvYRydc4Ugf5tC.REbge8X8ZqksuJe4\/3h5Fhg20snu1KsSqDo6"
+                }
+            ]
+        },
+        "products": {
+            "sql": "SELECT id_barang,nama_barang,harga,stok FROM db_toko_online.products ORDER BY id_barang",
+            "rows": [
+                {
+                    "id_barang": "B001",
+                    "nama_barang": "Buku Tulis",
+                    "harga": "5000.00",
+                    "stok": 38
+                },
+                {
+                    "id_barang": "B002",
+                    "nama_barang": "Pulpen",
+                    "harga": "3000.00",
+                    "stok": 57
+                },
+                {
+                    "id_barang": "B003",
+                    "nama_barang": "Penggaris",
+                    "harga": "4000.00",
+                    "stok": 25
+                },
+                {
+                    "id_barang": "B004",
+                    "nama_barang": "Pensil 2B",
+                    "harga": "2500.00",
+                    "stok": 50
+                },
+                {
+                    "id_barang": "B005",
+                    "nama_barang": "Penghapus",
+                    "harga": "1500.00",
+                    "stok": 35
+                },
+                {
+                    "id_barang": "B006",
+                    "nama_barang": "Stabilo Pastel",
+                    "harga": "8500.00",
+                    "stok": 20
+                },
+                {
+                    "id_barang": "B007",
+                    "nama_barang": "Sticky Notes",
+                    "harga": "7000.00",
+                    "stok": 30
+                },
+                {
+                    "id_barang": "B008",
+                    "nama_barang": "Gunting Kertas",
+                    "harga": "12000.00",
+                    "stok": 15
+                },
+                {
+                    "id_barang": "B009",
+                    "nama_barang": "Tempat Pensil",
+                    "harga": "25000.00",
+                    "stok": 12
+                },
+                {
+                    "id_barang": "B010",
+                    "nama_barang": "Binder A5",
+                    "harga": "35000.00",
+                    "stok": 0
+                }
+            ]
+        },
+        "orders": {
+            "sql": "SELECT id_order,id_user,tanggal_order,total_harga,alamat_pengiriman FROM db_toko_online.orders ORDER BY tanggal_order",
+            "rows": [
+                {
+                    "id_order": "ORDLPCWM2DFBC86",
+                    "id_user": "U001",
+                    "tanggal_order": "2026-10-05 17:36:01",
+                    "total_harga": "19000.00",
+                    "alamat_pengiriman": "Jalan Belajar No. 12, Bandung (alamat demo)"
+                }
+            ]
+        },
+        "details": {
+            "sql": "SELECT * FROM db_toko_online.order_details ORDER BY id_order,id_barang",
+            "rows": [
+                {
+                    "id_order": "ORDLPCWM2DFBC86",
+                    "id_barang": "B001",
+                    "harga_satuan": "5000.00",
+                    "jumlah_beli": 2
+                },
+                {
+                    "id_order": "ORDLPCWM2DFBC86",
+                    "id_barang": "B002",
+                    "harga_satuan": "3000.00",
+                    "jumlah_beli": 3
+                }
+            ]
+        },
+        "cart": {
+            "sql": "SELECT * FROM db_toko_online.cart_items",
+            "rows": []
+        }
+    }
+}
