@@ -4,7 +4,7 @@ Toko alat tulis Laravel 13 + MySQL dengan login, 10 barang bergambar, keranjang 
 
 ## Menjalankan
 
-1. Siapkan PHP 8.3+, Composer, serta MySQL/MariaDB, lalu `composer install` di folder ini.
+1. Siapkan PHP 8.4.1+, Composer, serta MySQL/MariaDB, lalu `composer install` di folder ini. Laravel 13 sendiri mendukung PHP 8.3+, tetapi paket Symfony pada `composer.lock` proyek ini memerlukan PHP 8.4.1+.
 2. Salin `.env.example` menjadi `.env`. Atur `DB_CONNECTION=mysql`, `DB_DATABASE=db_toko_online`, dan kredensial database. Gunakan `SESSION_DRIVER=file` serta `SESSION_COOKIE=toko_online_session` agar tidak bentrok dengan tugas lain.
 3. Buat database kosong: `CREATE DATABASE db_toko_online CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;`.
 4. Jalankan `php artisan key:generate`, kemudian `php artisan migrate --seed`.
@@ -56,6 +56,8 @@ Tes `test_database_failure_mid_checkout_rolls_back_order_details_stock_and_cart`
 Konfigurasi `phpunit.xml` harus memakai database tes terisolasi. Tes SQLite memverifikasi perilaku fungsional dan rollback, tetapi tidak membuktikan perilaku lock MySQL dalam permintaan paralel nyata. Uji browser/HTTP pada MySQL diperlukan untuk bukti lingkungan target. Laravel melewati pemeriksaan CSRF saat feature test; keberadaan field diuji di sini, sementara penolakan token hilang diperiksa pada HTTP nyata.
 
 ## Skenario demonstrasi yang dapat diulang
+
+Urutan presentasi ketiga aplikasi dan cara membandingkan stok yang sudah berubah tersedia dalam [panduan demo Modul 4](../docs/panduan-demo.md).
 
 Pada database baru: login sebagai Budi, tambahkan **Buku Tulis B001 sebanyak 2** dan **Pulpen B002 sebanyak 3**, lalu checkout dengan alamat contoh. Total seharusnya **Rp19.000**, order memiliki dua detail, stok buku berubah **40 → 38**, stok pulpen **60 → 57**, dan keranjang Budi menjadi kosong. Riwayat Budi menampilkan pesanan tersebut; Siti tidak dapat melihatnya. Mengulangi POST dengan token yang sama tidak menambah pesanan baru.
 

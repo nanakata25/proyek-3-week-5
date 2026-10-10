@@ -4,7 +4,7 @@
 
 ## Menjalankan aplikasi
 
-Prasyarat: PHP dan ekstensi yang dibutuhkan Laravel 13, Composer, serta MySQL. Tidak membutuhkan build frontend/NPM karena CSS dan modul JavaScript langsung dilayani dari `public`.
+Prasyarat: PHP 8.4.1+ sesuai paket pada `composer.lock`, ekstensi yang dibutuhkan Laravel 13, Composer, serta MySQL/MariaDB. Tidak membutuhkan build frontend/NPM karena CSS dan modul JavaScript langsung dilayani dari `public`.
 
 ```sh
 composer install
@@ -12,7 +12,7 @@ cp .env.example .env
 php artisan key:generate
 ```
 
-Siapkan database MySQL `modul4_keranjang`, lalu setel `.env`:
+Siapkan database MySQL `db_keranjang` sesuai `.env.example`, lalu setel `.env`:
 
 ```dotenv
 APP_NAME="Ruang Tulis"
@@ -20,7 +20,7 @@ APP_URL=http://127.0.0.1:8002
 DB_CONNECTION=mysql
 DB_HOST=127.0.0.1
 DB_PORT=3306
-DB_DATABASE=modul4_keranjang
+DB_DATABASE=db_keranjang
 DB_USERNAME=root
 DB_PASSWORD=
 SESSION_DRIVER=file
@@ -67,6 +67,8 @@ Data browser dinormalisasi: ID harus dikenal; jumlah harus bilangan bulat positi
 5. **Browser lain:** keranjang tidak muncul karena Local Storage terpisah per origin dan profil browser. Port berbeda juga berarti origin berbeda. Mode privat, penghapusan data situs, pengaturan browser, atau profil lain dapat menghilangkan/memisahkan data. Sinkronisasi tab hanya berlaku dalam origin dan profil yang sama.
 
 ## Pengujian dan bukti
+
+Urutan presentasi ketiga aplikasi tersedia dalam [panduan demo Modul 4](../docs/panduan-demo.md).
 
 Pengujian fungsi data dapat dijalankan tanpa browser:
 

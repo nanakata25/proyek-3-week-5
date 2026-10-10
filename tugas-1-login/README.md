@@ -4,7 +4,7 @@ Aplikasi Laravel 13 tanpa starter kit. Autentikasi menggunakan **username**, `Au
 
 ## Menjalankan
 
-1. Pasang PHP 8.3+ dengan ekstensi Laravel, Composer, dan MySQL/MariaDB.
+1. Pasang PHP 8.4.1+ dengan ekstensi Laravel, Composer, dan MySQL/MariaDB. Laravel 13 sendiri mendukung PHP 8.3+, tetapi paket Symfony pada `composer.lock` proyek ini memerlukan PHP 8.4.1+.
 2. Jalankan `composer install` di folder ini.
 3. Salin `.env.example` menjadi `.env`, lalu sesuaikan akses MySQL. Database: `db_tugas`. Driver sesi: `file`, cookie sesi: `tugas1_session`.
 4. Buat database kosong: `CREATE DATABASE db_tugas CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;`.
@@ -43,6 +43,8 @@ Kredensial ini khusus data praktikum lokal. Sistem tidak menyediakan fitur remem
 Jalankan `php artisan test --filter=AuthenticationTest`. Pengujian mencakup seed ter-hash, redirect tamu, login benar/salah, regenerasi ID sesi, validasi, middleware guest, logout yang menghapus data sesi dan mengganti CSRF token, penolakan GET logout, serta keberadaan field CSRF. Tes memakai database terisolasi sesuai `phpunit.xml`; jangan arahkan konfigurasi tes ke database aplikasi. Middleware CSRF dilewati oleh Laravel saat HTTP feature test, sehingga penolakan POST tanpa token perlu diperiksa dengan HTTP/browser sungguhan.
 
 ## Bukti layar yang diperlukan
+
+Urutan presentasi ketiga aplikasi tersedia dalam [panduan demo Modul 4](../docs/panduan-demo.md).
 
 1. Isi `users` melalui klien database (`SELECT id, username, password, nama_lengkap FROM users;`).
 2. Login gagal dengan password salah.
