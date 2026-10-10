@@ -123,7 +123,8 @@ document.querySelector('#clear-cart')?.addEventListener('click', () => {
 });
 
 window.addEventListener('storage', event => {
-    if (event.key === STORAGE_KEY || event.key === null) {
+    // Preserve unsaved local changes while using the temporary cart fallback.
+    if (storageAvailable && (event.key === STORAGE_KEY || event.key === null)) {
         readCart();
         render();
     }

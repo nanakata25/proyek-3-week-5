@@ -73,7 +73,7 @@ Urutan presentasi ketiga aplikasi tersedia dalam [panduan demo Modul 4](../docs/
 Pengujian fungsi data dapat dijalankan tanpa browser:
 
 ```sh
-node --test tests/cart-store.test.mjs
+node --test tests/cart-store.test.mjs tests/cart-browser.test.mjs
 php artisan test --compact
 ```
 

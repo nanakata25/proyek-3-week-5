@@ -2,7 +2,7 @@
   "name": "modul4-verification",
   "private": true,
   "scripts": {
-    "test:cart": "node --test tugas-2-keranjang/tests/cart-store.test.mjs",
+    "test:cart": "node --test tugas-2-keranjang/tests/cart-store.test.mjs tugas-2-keranjang/tests/cart-browser.test.mjs",
     "test:browser": "node scripts/browser-tugas12.cjs",
     "test:experiments": "node scripts/browser-eksperimen.cjs",
     "test:shop": "node scripts/browser-shop.cjs"
