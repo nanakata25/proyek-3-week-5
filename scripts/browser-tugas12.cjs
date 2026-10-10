@@ -1,5 +1,6 @@
 /* Real-browser verification and screenshot capture; never uses a personal profile. */
 const { chromium, request } = require('./playwright-runtime.cjs');
+const { chromeOptions } = require('./browser-options.cjs');
 const assert = require('node:assert/strict');
 const fs = require('node:fs/promises');
 const path = require('node:path');
@@ -7,12 +8,11 @@ const path = require('node:path');
 const root = path.resolve(__dirname, '..');
 const output = path.join(root, 'evidence');
 const shots = path.join(output, 'screenshots');
-const executablePath = process.env.CHROME_PATH || 'C:/Program Files/Google/Chrome/Application/chrome.exe';
 const t1 = process.env.T1_URL || 'http://127.0.0.1:8001';
 const t2 = process.env.T2_URL || 'http://127.0.0.1:8002';
 const profile = path.join(root, '.runtime', 'test-profile-t2');
 const storageKey = 'modul4.tugas2.keranjang';
-const config = { executablePath, headless: true, args: ['--no-first-run', '--disable-default-apps'] };
+const config = { ...chromeOptions(), args: ['--no-first-run', '--disable-default-apps'] };
 const viewport = { width: 1366, height: 900 };
 const results = { startedAt: new Date().toISOString(), origins: { t1, t2 }, viewport, steps: [], screenshots: [], consoleErrors: [] };
 let browser;

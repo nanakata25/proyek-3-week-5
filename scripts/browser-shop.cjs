@@ -1,11 +1,12 @@
 const {chromium}=require('./playwright-runtime.cjs');
+const {chromeOptions}=require('./browser-options.cjs');
 const assert=require('node:assert/strict'),fs=require('node:fs/promises'),path=require('node:path'),{execFileSync}=require('node:child_process');
 const root=path.resolve(__dirname,'..'),shots=path.join(root,'evidence/screenshots'),base='http://127.0.0.1:8003';
 const result={date:new Date().toISOString(),steps:[]};let browser;
 const db=()=>{execFileSync(path.join(root,'.runtime/php/php.exe'),[path.join(root,'scripts/export-evidence.php')]);return JSON.parse(require('node:fs').readFileSync(path.join(root,'evidence/database-snapshot.json')));};
 async function test(name,fn){try{const detail=await fn();result.steps.push({name,passed:true,...detail});console.log('PASS',name);}catch(e){result.steps.push({name,passed:false,error:e.message});throw e;}}
 async function shot(p,name){await p.screenshot({path:path.join(shots,name+'.png'),fullPage:true});}
-(async()=>{await fs.mkdir(shots,{recursive:true});browser=await chromium.launch({executablePath:'C:/Program Files/Google/Chrome/Application/chrome.exe',headless:true});const c=await browser.newContext({viewport:{width:1366,height:900}}),p=await c.newPage();
+(async()=>{await fs.mkdir(shots,{recursive:true});browser=await chromium.launch(chromeOptions());const c=await browser.newContext({viewport:{width:1366,height:900}}),p=await c.newPage();
 await test('Katalog publik sepuluh produk dan stok habis',async()=>{await p.goto(base,{waitUntil:'networkidle'});assert.equal(await p.locator('.product-card').count(),10);await shot(p,'toko-katalog');await p.goto(base+'/keranjang');assert.equal(p.url(),base+'/login');await shot(p,'toko-login');});
 await test('Login Budi dan mengisi keranjang',async()=>{await p.locator('#username').fill('budi');await p.locator('#password').fill('rahasia123');await p.getByRole('button',{name:/Masuk/}).click();await p.waitForLoadState('networkidle');await p.goto(base);for(const id of ['B001','B001','B002','B002','B002']){await p.locator('form[action="'+base+'/keranjang/'+id+'"] button').click();await p.waitForLoadState('networkidle');}await p.goto(base+'/keranjang');assert.match(await p.locator('.grand-total').innerText(),/19.000/);await shot(p,'toko-keranjang');result.before=db();assert.equal(result.before.queries.products.rows.find(r=>r.id_barang==='B001').stok,40);});
 let orderId;

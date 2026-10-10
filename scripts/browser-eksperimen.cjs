@@ -1,4 +1,5 @@
 const {chromium}=require('./playwright-runtime.cjs');
+const {chromeOptions}=require('./browser-options.cjs');
 const fs=require('node:fs/promises'),path=require('node:path'),assert=require('node:assert/strict');
 const out=path.resolve('evidence'),shots=path.join(out,'screenshots'),base='http://127.0.0.1:8004/eksperimen/';
 const result={date:new Date().toISOString(),steps:[],network:[]};
@@ -7,7 +8,7 @@ async function check(name,fn){try {const detail=await fn(); result.steps.push({n
 async function shot(p,name){await p.screenshot({path:path.join(shots,name+'.png'),fullPage:true});}
 async function go(p,name){const r=await p.goto(base+name,{waitUntil:'networkidle'});assert.ok(r.status()<400);}
 (async()=>{
-await fs.mkdir(shots,{recursive:true});browser=await chromium.launch({executablePath:'C:/Program Files/Google/Chrome/Application/chrome.exe',headless:true});
+await fs.mkdir(shots,{recursive:true});browser=await chromium.launch(chromeOptions());
 const ctx=await browser.newContext({viewport:{width:1366,height:850}});let p=await ctx.newPage();
 await check('E01-02 HTTP stateless',async()=>{await go(p,'langkah1.php');await p.locator('[name=nama]').fill('Budi');await p.locator('button[type=submit]').click();await p.waitForURL('**/langkah2.php');assert.match(await p.locator('body').innerText(),/Budi/);await shot(p,'e01-nama-diterima');await p.locator('a[href="langkah3.php"]').click();assert.match(await p.locator('body').innerText(),/tidak diketahui/);await shot(p,'e02-stateless');return{request2:'Budi',request3:'tidak diketahui'};});
 await check('E03-05 Cookie normal dan redirect',async()=>{await go(p,'cookie_dasar.php');assert.equal(await p.locator('#kunjungan').innerText(),'1');const handler=r=>{if(r.url().endsWith('cookie_dasar.php'))result.network.push({method:r.request().method(),status:r.status(),url:r.url()});};p.on('response',handler);await p.locator('#nama').fill('Budi');await p.locator('button[type=submit]').click();await p.waitForLoadState('networkidle');p.off('response',handler);assert.equal(await p.locator('#kunjungan').innerText(),'2');await shot(p,'e03-cookie-normal');const cookies=await ctx.cookies(base);assert.equal(cookies.find(c=>c.name==='nama').value,'Budi');await p.reload();assert.equal(await p.locator('#kunjungan').innerText(),'3');await p.getByText('Lupakan saya',{exact:true}).click();await p.waitForLoadState('networkidle');assert.equal(await p.locator('#kunjungan').innerText(),'4');assert.ok(!(await ctx.cookies(base)).some(c=>c.name==='nama'));return{counter:[1,2,3,4],network:result.network};});
