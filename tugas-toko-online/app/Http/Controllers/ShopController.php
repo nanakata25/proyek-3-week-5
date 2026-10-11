@@ -47,7 +47,9 @@ class ShopController extends Controller
         return redirect()->route('orders.show',$id)->with('success','Checkout berhasil. Pesanan tersimpan dan keranjang dikosongkan.');
     }
     public function orders(Request $r) {
-        return view('orders',['orders'=>DB::table('orders')->where('id_user',$r->user()->id_user)->orderByDesc('tanggal_order')->get()]);
+        $orders=DB::table('orders')->where('id_user',$r->user()->id_user)
+            ->orderByDesc('tanggal_order')->orderByDesc('id_order')->paginate(10);
+        return view('orders',['orders'=>$orders]);
     }
     public function order(Request $r,string $id) {
         $order=DB::table('orders')->where('id_order',$id)->where('id_user',$r->user()->id_user)->first();
