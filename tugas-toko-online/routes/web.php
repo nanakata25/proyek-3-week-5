@@ -2,6 +2,7 @@
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ShopController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\CartController;
 Route::get('/',[ShopController::class,'products'])->name('products');
 Route::middleware('guest')->group(function(){
     Route::get('/login',[AuthController::class,'form'])->name('login');
@@ -17,3 +18,12 @@ Route::middleware('auth')->group(function(){
     Route::get('/pesanan',[ShopController::class,'orders'])->name('orders');
     Route::get('/pesanan/{id}',[ShopController::class,'order'])->name('orders.show');
 });
+
+Route::get('/stateless', [CartController::class, 'index'])
+    ->name('stateless.index');
+
+Route::post('/cart/add', [CartController::class, 'add'])
+    ->name('stateless.cart.add');
+
+Route::post('/cart/update', [CartController::class, 'update'])
+    ->name('stateless.cart.update');
