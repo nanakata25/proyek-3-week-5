@@ -1,0 +1,16 @@
+
+ PATCH admin/products/{product} .. admin.products.update › InventoryController@update
+ ⇂ web
+ ⇂ auth
+ ⇂ can:manage-products
+ GET|HEAD admin/users .. admin.users.index › RoleController@index
+ ⇂ web
+ ⇂ auth
+ ⇂ can:manage-roles
+ PATCH admin/users/{user}/role .. admin.users.role.update › RoleController@update
+ ⇂ web
+ ⇂ auth
+ ⇂ can:manage-roles
+
+ Showing [3] routes
+

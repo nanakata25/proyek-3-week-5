@@ -1,0 +1,2 @@
+[2026-10-21 23:44:10] local.INFO: user.role.changed {"target_user_id":"M5CUSTOMER","old_role":"customer","new_role":"staff","actor_id":"M5ADMIN"} 
+[2026-10-21 23:44:51] local.INFO: user.role.changed {"target_user_id":"M5CUSTOMER","old_role":"customer","new_role":"staff","actor_id":null} 

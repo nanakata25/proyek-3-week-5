@@ -1,0 +1,515 @@
+{
+  "date": "2026-10-21",
+  "database": "SQLite dummy modul5-demo.sqlite",
+  "scenarios": [
+    {
+      "id": "E01",
+      "name": "Admin mengubah customer menjadi staff",
+      "method": "PATCH",
+      "url": "/admin/users/M5CUSTOMER/role",
+      "payload": {
+        "role": "staff"
+      },
+      "status": 302,
+      "before": {
+        "id_user": "M5CUSTOMER",
+        "username": "customer_modul5",
+        "nama_lengkap": "Customer Modul 5",
+        "role": "customer"
+      },
+      "after": {
+        "id_user": "M5CUSTOMER",
+        "username": "customer_modul5",
+        "nama_lengkap": "Customer Modul 5",
+        "role": "staff"
+      },
+      "logsAdded": 1,
+      "log": [
+        "[2026-10-21 23:44:10] local.INFO: user.role.changed {\"target_user_id\":\"M5CUSTOMER\",\"old_role\":\"customer\",\"new_role\":\"staff\",\"actor_id\":\"M5ADMIN\"} "
+      ],
+      "response": {
+        "location": "http://127.0.0.1:8015/admin/users"
+      },
+      "screenshot": "E01.png"
+    },
+    {
+      "id": "E02",
+      "name": "Customer mencoba PATCH role",
+      "method": "PATCH",
+      "url": "/admin/users/M5STAFF/role",
+      "payload": {
+        "role": "customer"
+      },
+      "status": 403,
+      "before": {
+        "id_user": "M5STAFF",
+        "username": "staff_modul5",
+        "nama_lengkap": "Staff Modul 5",
+        "role": "staff"
+      },
+      "after": {
+        "id_user": "M5STAFF",
+        "username": "staff_modul5",
+        "nama_lengkap": "Staff Modul 5",
+        "role": "staff"
+      },
+      "logsAdded": 0,
+      "log": [],
+      "response": {
+        "message": "This action is unauthorized."
+      },
+      "screenshot": "E02.png"
+    },
+    {
+      "id": "E03",
+      "name": "Admin mencoba mengubah role dirinya",
+      "method": "PATCH",
+      "url": "/admin/users/M5ADMIN/role",
+      "payload": {
+        "role": "staff"
+      },
+      "status": 422,
+      "before": {
+        "id_user": "M5ADMIN",
+        "username": "admin_modul5",
+        "nama_lengkap": "Admin Modul 5",
+        "role": "admin"
+      },
+      "after": {
+        "id_user": "M5ADMIN",
+        "username": "admin_modul5",
+        "nama_lengkap": "Admin Modul 5",
+        "role": "admin"
+      },
+      "logsAdded": 0,
+      "log": [],
+      "response": {
+        "message": "Akun sendiri atau akun admin tidak dapat diubah di fitur ini.",
+        "errors": {
+          "role": [
+            "Akun sendiri atau akun admin tidak dapat diubah di fitur ini."
+          ]
+        }
+      },
+      "screenshot": "E03.png"
+    },
+    {
+      "id": "E04",
+      "name": "Input role admin ditolak validasi",
+      "method": "PATCH",
+      "url": "/admin/users/M5STAFF/role",
+      "payload": {
+        "role": "admin"
+      },
+      "status": 422,
+      "before": {
+        "id_user": "M5STAFF",
+        "username": "staff_modul5",
+        "nama_lengkap": "Staff Modul 5",
+        "role": "staff"
+      },
+      "after": {
+        "id_user": "M5STAFF",
+        "username": "staff_modul5",
+        "nama_lengkap": "Staff Modul 5",
+        "role": "staff"
+      },
+      "logsAdded": 0,
+      "log": [],
+      "response": {
+        "message": "The selected role is invalid.",
+        "errors": {
+          "role": [
+            "The selected role is invalid."
+          ]
+        }
+      },
+      "screenshot": "E04.png"
+    },
+    {
+      "id": "E05",
+      "name": "Role target sama sehingga tidak ada save",
+      "method": "PATCH",
+      "url": "/admin/users/M5CUSTOMER/role",
+      "payload": {
+        "role": "staff"
+      },
+      "status": 302,
+      "before": {
+        "id_user": "M5CUSTOMER",
+        "username": "customer_modul5",
+        "nama_lengkap": "Customer Modul 5",
+        "role": "staff"
+      },
+      "after": {
+        "id_user": "M5CUSTOMER",
+        "username": "customer_modul5",
+        "nama_lengkap": "Customer Modul 5",
+        "role": "staff"
+      },
+      "logsAdded": 0,
+      "log": [],
+      "response": {
+        "location": "http://127.0.0.1:8015/admin/users"
+      },
+      "screenshot": "E05.png"
+    },
+    {
+      "id": "E06",
+      "name": "Staff mencoba cart dengan payload valid",
+      "method": "POST",
+      "url": "/cart/add",
+      "payload": {
+        "cart": {
+          "1": 2
+        },
+        "product_id": 2
+      },
+      "status": 403,
+      "before": {
+        "id_user": "M5STAFF",
+        "username": "staff_modul5",
+        "nama_lengkap": "Staff Modul 5",
+        "role": "staff"
+      },
+      "after": {
+        "id_user": "M5STAFF",
+        "username": "staff_modul5",
+        "nama_lengkap": "Staff Modul 5",
+        "role": "staff"
+      },
+      "logsAdded": 0,
+      "log": [],
+      "response": {
+        "message": "This action is unauthorized."
+      },
+      "screenshot": "E06.png"
+    },
+    {
+      "id": "E07",
+      "name": "Sesi customer lama langsung mengikuti role staff baru",
+      "method": "POST",
+      "url": "/cart/add",
+      "payload": {
+        "cart": {
+          "1": 2
+        },
+        "product_id": 2
+      },
+      "status": 403,
+      "before": {
+        "id_user": "M5CUSTOMER",
+        "username": "customer_modul5",
+        "nama_lengkap": "Customer Modul 5",
+        "role": "staff"
+      },
+      "after": {
+        "id_user": "M5CUSTOMER",
+        "username": "customer_modul5",
+        "nama_lengkap": "Customer Modul 5",
+        "role": "staff"
+      },
+      "logsAdded": 0,
+      "log": [],
+      "response": {
+        "message": "This action is unauthorized."
+      },
+      "screenshot": "E07.png"
+    },
+    {
+      "id": "E08",
+      "name": "Admin lain juga dilindungi service",
+      "method": "PATCH",
+      "url": "/admin/users/M5ADMIN2/role",
+      "payload": {
+        "role": "staff"
+      },
+      "status": 422,
+      "before": {
+        "id_user": "M5ADMIN2",
+        "username": "admin_lain5",
+        "nama_lengkap": "Admin Lain Modul 5",
+        "role": "admin"
+      },
+      "after": {
+        "id_user": "M5ADMIN2",
+        "username": "admin_lain5",
+        "nama_lengkap": "Admin Lain Modul 5",
+        "role": "admin"
+      },
+      "logsAdded": 0,
+      "log": [],
+      "response": {
+        "message": "Akun sendiri atau akun admin tidak dapat diubah di fitur ini.",
+        "errors": {
+          "role": [
+            "Akun sendiri atau akun admin tidak dapat diubah di fitur ini."
+          ]
+        }
+      },
+      "screenshot": "E08.png"
+    },
+    {
+      "id": "E09",
+      "name": "Validasi formulir HTML memakai redirect",
+      "method": "PATCH",
+      "url": "/admin/users/M5STAFF/role",
+      "payload": {
+        "role": "admin"
+      },
+      "status": 302,
+      "before": {
+        "id_user": "M5STAFF",
+        "username": "staff_modul5",
+        "nama_lengkap": "Staff Modul 5",
+        "role": "staff"
+      },
+      "after": {
+        "id_user": "M5STAFF",
+        "username": "staff_modul5",
+        "nama_lengkap": "Staff Modul 5",
+        "role": "staff"
+      },
+      "logsAdded": 0,
+      "log": [],
+      "response": {
+        "location": "http://127.0.0.1:8015/admin/users"
+      },
+      "screenshot": "E09.png"
+    }
+  ],
+  "baseline": {
+    "users": [
+      {
+        "id_user": "M5ADMIN",
+        "username": "admin_modul5",
+        "nama_lengkap": "Admin Modul 5",
+        "role": "admin"
+      },
+      {
+        "id_user": "M5ADMIN2",
+        "username": "admin_lain5",
+        "nama_lengkap": "Admin Lain Modul 5",
+        "role": "admin"
+      },
+      {
+        "id_user": "M5CUSTOMER",
+        "username": "customer_modul5",
+        "nama_lengkap": "Customer Modul 5",
+        "role": "customer"
+      },
+      {
+        "id_user": "M5STAFF",
+        "username": "staff_modul5",
+        "nama_lengkap": "Staff Modul 5",
+        "role": "staff"
+      },
+      {
+        "id_user": "U001",
+        "username": "budi",
+        "nama_lengkap": "Budi Santoso",
+        "role": "customer"
+      },
+      {
+        "id_user": "U002",
+        "username": "siti",
+        "nama_lengkap": "Siti Aminah",
+        "role": "customer"
+      }
+    ],
+    "products": [
+      {
+        "id_barang": "B001",
+        "nama_barang": "Buku Tulis",
+        "stok": 40
+      },
+      {
+        "id_barang": "B002",
+        "nama_barang": "Pulpen",
+        "stok": 60
+      },
+      {
+        "id_barang": "B003",
+        "nama_barang": "Penggaris",
+        "stok": 25
+      },
+      {
+        "id_barang": "B004",
+        "nama_barang": "Pensil 2B",
+        "stok": 50
+      },
+      {
+        "id_barang": "B005",
+        "nama_barang": "Penghapus",
+        "stok": 35
+      },
+      {
+        "id_barang": "B006",
+        "nama_barang": "Stabilo Pastel",
+        "stok": 20
+      },
+      {
+        "id_barang": "B007",
+        "nama_barang": "Sticky Notes",
+        "stok": 30
+      },
+      {
+        "id_barang": "B008",
+        "nama_barang": "Gunting Kertas",
+        "stok": 15
+      },
+      {
+        "id_barang": "B009",
+        "nama_barang": "Tempat Pensil",
+        "stok": 12
+      },
+      {
+        "id_barang": "B010",
+        "nama_barang": "Binder A5",
+        "stok": 0
+      }
+    ],
+    "driver": "sqlite"
+  },
+  "guest": {
+    "htmlStatus": 302,
+    "location": "http://127.0.0.1:8015/login"
+  },
+  "observer": {
+    "bulk": {
+      "id": "F04",
+      "name": "Bulk update mengubah DB tanpa event model per baris",
+      "method": "CLI lokal",
+      "url": "User::whereKey(...)->update(...)",
+      "payload": {
+        "role": "customer"
+      },
+      "status": 0,
+      "before": {
+        "id_user": "M5CUSTOMER",
+        "username": "customer_modul5",
+        "nama_lengkap": "Customer Modul 5",
+        "role": "staff"
+      },
+      "after": {
+        "id_user": "M5CUSTOMER",
+        "username": "customer_modul5",
+        "nama_lengkap": "Customer Modul 5",
+        "role": "customer"
+      },
+      "logsAdded": 0,
+      "log": [],
+      "response": {
+        "hasil": "Role berubah melalui query bulk; Observer tidak dipanggil."
+      },
+      "screenshot": "F04.png"
+    },
+    "restore": {
+      "role": "staff",
+      "logsAdded": 1,
+      "log": [
+        "[2026-10-21 23:44:51] local.INFO: user.role.changed {\"target_user_id\":\"M5CUSTOMER\",\"old_role\":\"customer\",\"new_role\":\"staff\",\"actor_id\":null} "
+      ]
+    }
+  },
+  "final": {
+    "users": [
+      {
+        "id_user": "M5ADMIN",
+        "username": "admin_modul5",
+        "nama_lengkap": "Admin Modul 5",
+        "role": "admin"
+      },
+      {
+        "id_user": "M5ADMIN2",
+        "username": "admin_lain5",
+        "nama_lengkap": "Admin Lain Modul 5",
+        "role": "admin"
+      },
+      {
+        "id_user": "M5CUSTOMER",
+        "username": "customer_modul5",
+        "nama_lengkap": "Customer Modul 5",
+        "role": "staff"
+      },
+      {
+        "id_user": "M5STAFF",
+        "username": "staff_modul5",
+        "nama_lengkap": "Staff Modul 5",
+        "role": "staff"
+      },
+      {
+        "id_user": "U001",
+        "username": "budi",
+        "nama_lengkap": "Budi Santoso",
+        "role": "customer"
+      },
+      {
+        "id_user": "U002",
+        "username": "siti",
+        "nama_lengkap": "Siti Aminah",
+        "role": "customer"
+      }
+    ],
+    "products": [
+      {
+        "id_barang": "B001",
+        "nama_barang": "Buku Tulis",
+        "stok": 40
+      },
+      {
+        "id_barang": "B002",
+        "nama_barang": "Pulpen",
+        "stok": 60
+      },
+      {
+        "id_barang": "B003",
+        "nama_barang": "Penggaris",
+        "stok": 25
+      },
+      {
+        "id_barang": "B004",
+        "nama_barang": "Pensil 2B",
+        "stok": 50
+      },
+      {
+        "id_barang": "B005",
+        "nama_barang": "Penghapus",
+        "stok": 35
+      },
+      {
+        "id_barang": "B006",
+        "nama_barang": "Stabilo Pastel",
+        "stok": 20
+      },
+      {
+        "id_barang": "B007",
+        "nama_barang": "Sticky Notes",
+        "stok": 30
+      },
+      {
+        "id_barang": "B008",
+        "nama_barang": "Gunting Kertas",
+        "stok": 15
+      },
+      {
+        "id_barang": "B009",
+        "nama_barang": "Tempat Pensil",
+        "stok": 12
+      },
+      {
+        "id_barang": "B010",
+        "nama_barang": "Binder A5",
+        "stok": 0
+      }
+    ],
+    "driver": "sqlite"
+  },
+  "summary": {
+    "roleTests": 17,
+    "roleAssertions": 100,
+    "allTests": 44,
+    "allAssertions": 369,
+    "htmlValidationStatus": 302
+  }
+}

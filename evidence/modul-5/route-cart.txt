@@ -1,0 +1,12 @@
+
+ POST cart/add .. stateless.cart.add › CartController@add
+ ⇂ web
+ ⇂ auth
+ ⇂ can:use-cart
+ POST cart/update .. stateless.cart.update › CartController@update
+ ⇂ web
+ ⇂ auth
+ ⇂ can:use-cart
+
+ Showing [2] routes
+
