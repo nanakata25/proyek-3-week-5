@@ -6,11 +6,11 @@
 <div class="product-grid">
 @foreach($products as $product)
     <article class="product-card {{ $product->stok === 0 ? 'sold-out' : '' }}">
-        <div class="product-image"><img src="{{ asset('images/'.$product->gambar) }}" alt="{{ $product->nama_barang }}" width="240" height="168">@if($product->stok === 0)<span class="stock-badge empty">Stok habis</span>@else<span class="stock-badge">Stok {{ $product->stok }}</span>@endif</div>
+        <div class="product-image"><img src="{{ asset('images/'.$product->gambar) }}" alt="{{ $product->nama_barang }}" width="240" height="168">@if($product->stok === 0)<span class="stock-badge empty">Stok habis</span>@else@can('adjust-stock')<span class="stock-badge">Stok {{ $product->stok }}</span>@endcan@endif</div>
         <div class="product-content"><span class="product-code">{{ $product->id_barang }}</span><h3>{{ $product->nama_barang }}</h3><p>{{ $product->deskripsi }}</p><div class="product-bottom"><strong class="price">Rp{{ number_format((float)$product->harga, 0, ',', '.') }}</strong>
             @if($product->stok === 0)<button type="button" class="add-button" disabled aria-label="{{ $product->nama_barang }} stok habis">Habis</button>
             @else
-                @auth<form method="POST" action="{{ route('cart.add', $product->id_barang) }}">@csrf<button type="submit" class="add-button" aria-label="Tambah {{ $product->nama_barang }} ke keranjang">+ Tambah</button></form>@else<a class="add-button" href="{{ route('login') }}" aria-label="Login untuk membeli {{ $product->nama_barang }}">Login beli</a>@endauth
+                @can('use-cart')<form method="POST" action="{{ route('cart.add', $product->id_barang) }}">@csrf<button type="submit" class="add-button" aria-label="Tambah {{ $product->nama_barang }} ke keranjang">+ Tambah</button></form>@else@guest<a class="add-button" href="{{ route('login') }}" aria-label="Login untuk membeli {{ $product->nama_barang }}">Login beli</a>@endguest@endcan
             @endif
         </div></div>
     </article>
