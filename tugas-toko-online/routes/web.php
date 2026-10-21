@@ -3,7 +3,13 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ShopController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CartController;
+use App\Http\Controllers\RoleController;
 Route::get('/',[ShopController::class,'products'])->name('products');
+Route::get('/dashboard', fn () => view('dashboard'))->middleware('auth')->name('dashboard');
+Route::middleware(['auth', 'can:manage-roles'])->group(function () {
+    Route::get('/admin/users', [RoleController::class, 'index'])->name('admin.users.index');
+    Route::patch('/admin/users/{user}/role', [RoleController::class, 'update'])->name('admin.users.role.update');
+});
 Route::middleware('guest')->group(function(){
     Route::get('/login',[AuthController::class,'form'])->name('login');
     Route::post('/login',[AuthController::class,'login'])->middleware('throttle:10,1');
