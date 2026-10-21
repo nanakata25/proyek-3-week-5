@@ -1,0 +1,72 @@
+[
+  {
+    "short": "355aa76",
+    "sha": "355aa7645d105652a75164441ff3c375e0ff5fe2",
+    "subject": "docs: record module 5 access matrix and execution predictions"
+  },
+  {
+    "short": "5e53ed1",
+    "sha": "5e53ed109699f620f39fa2984f712ea083cfa218",
+    "subject": "feat: add indexed customer role default without public mass assignment"
+  },
+  {
+    "short": "4f99958",
+    "sha": "4f9995872d9bca37d9881758e791cca8611d4398",
+    "subject": "feat: seed local admin customer and staff demonstration accounts"
+  },
+  {
+    "short": "5b30985",
+    "sha": "5b30985811e16808494c57664e5a14c227fc0d06",
+    "subject": "feat: define role based abilities for users products stock and cart"
+  },
+  {
+    "short": "d9f41c6",
+    "sha": "d9f41c673c51815fa901dab5302d85362de70add",
+    "subject": "feat: validate role changes against customer and staff allowlist"
+  },
+  {
+    "short": "cecde2d",
+    "sha": "cecde2ddc133aedf84aac1f9c205319d87da6577",
+    "subject": "feat: enforce role business rules and skip unchanged assignments"
+  },
+  {
+    "short": "d5d0641",
+    "sha": "d5d0641732fd795471b7395acc66e8c7683d913c",
+    "subject": "feat: observe instance role changes with limited audit context"
+  },
+  {
+    "short": "03a9542",
+    "sha": "03a9542b2310d3ffd1eb85fa8d15218c46ab2eaa",
+    "subject": "feat: expose admin role management flow and authenticated dashboard"
+  },
+  {
+    "short": "70aed79",
+    "sha": "70aed7900100a5b6d558382bfa208f096ad3f6b0",
+    "subject": "feat: enforce customer cart access across stateless and checkout routes"
+  },
+  {
+    "short": "22e86cd",
+    "sha": "22e86cd90592af8aaba14ef74267735fd47c3cb9",
+    "subject": "feat: expose protected inventory and admin product updates"
+  },
+  {
+    "short": "e11d5a0",
+    "sha": "e11d5a01c59b234a3cda3cb8b0cb552364bdd1c5",
+    "subject": "fix: hide stock counts and cart actions from unauthorized catalog viewers"
+  },
+  {
+    "short": "78285e7",
+    "sha": "78285e7f8165ba2cd258a011c3c3c0dcf5752934",
+    "subject": "test: verify role rules observer behavior and inventory access matrix"
+  },
+  {
+    "short": "e8980cf",
+    "sha": "e8980cfbc9198ca101d7e3fa6e3d6b6cf30b9c25",
+    "subject": "feat: provide isolated local role demo and safe database evidence tools"
+  },
+  {
+    "short": "39481c2",
+    "sha": "39481c258b493fe841bdb227ad4cdc7b6f949c39",
+    "subject": "test: exercise role changes through browser HTTP database and logs"
+  }
+]
