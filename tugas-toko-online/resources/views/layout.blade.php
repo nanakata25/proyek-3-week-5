@@ -13,14 +13,20 @@
         <nav aria-label="Navigasi utama">
             <a class="nav-link {{ request()->routeIs('products') ? 'active' : '' }}" href="{{ route('products') }}">Katalog</a>
             @auth
+                <a class="nav-link" href="{{ route('dashboard') }}">Dashboard</a>
+                @can('adjust-stock')<a class="nav-link" href="{{ route('inventory.index') }}">Stok</a>@endcan
+                @can('manage-roles')<a class="nav-link" href="{{ route('admin.users.index') }}">Role</a>@endcan
+                @can('use-cart')
                 @php($cartCount = \Illuminate\Support\Facades\DB::table('cart_items')->where('id_user', auth()->id())->sum('jumlah'))
                 <a class="nav-link {{ request()->routeIs('cart') ? 'active' : '' }}" href="{{ route('cart') }}">Keranjang <span class="count">{{ $cartCount }}</span></a>
                 <a class="nav-link {{ request()->routeIs('orders*') ? 'active' : '' }}" href="{{ route('orders') }}">Pesanan</a>
+                <a class="nav-link" href="{{ route('stateless.index') }}">Stateless</a>
+                @endcan
             @endauth
         </nav>
         <div class="account-nav">
             @auth
-                <span class="user-chip"><span class="avatar">{{ mb_substr(auth()->user()->nama_lengkap, 0, 1) }}</span>{{ auth()->user()->username }}</span>
+                <span class="user-chip"><span class="avatar">{{ mb_substr(auth()->user()->nama_lengkap, 0, 1) }}</span>{{ auth()->user()->username }} · {{ auth()->user()->role }}</span>
                 <form method="POST" action="{{ route('logout') }}">@csrf<button class="logout" type="submit">Logout</button></form>
             @else
                 <a class="button button-small" href="{{ route('login') }}">Login <span aria-hidden="true">↗</span></a>
