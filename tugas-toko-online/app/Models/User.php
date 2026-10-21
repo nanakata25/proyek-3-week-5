@@ -8,5 +8,7 @@ class User extends Authenticatable
     protected $keyType = 'string';
     protected $fillable = ['id_user','nama_lengkap','email','username','password','no_hp','alamat'];
     protected $hidden = ['password'];
+    // Role is assigned only by trusted seeders or RoleManagementService.
+    protected $attributes = ['role' => 'customer'];
     protected function casts(): array { return ['password' => 'hashed']; }
 }
