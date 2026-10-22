@@ -49,6 +49,6 @@ Untuk mengulangi bukti browser, siapkan dahulu M5CUSTOMER sebagai customer melal
 
 ## Checkpoint dan worksheet
 
-Branch: `codex/modul-5-role-management`. Daftar checkpoint kode tersedia pada `commits.json`; seluruh commit menggunakan isi dan waktu pengerjaan sebenarnya. Worksheet terisi disimpan dalam folder ini setelah pemeriksaan tata letak. Kolom kelompok dan peer assessment sengaja dibiarkan kosong sesuai permintaan mahasiswa.
+Branch: `modul-5-role-management`. Daftar checkpoint kode tersedia pada `commits.json`; seluruh commit menggunakan isi dan waktu pengerjaan sebenarnya. Worksheet terisi disimpan dalam folder ini setelah pemeriksaan tata letak. Kolom kelompok dan peer assessment sengaja dibiarkan kosong sesuai permintaan mahasiswa.
 
 Referensi teknis: Modul 5 halaman 2–8; dokumentasi resmi https://laravel.com/docs/13.x/authorization dan https://laravel.com/docs/13.x/eloquent#observers. Lokasi trigger event di framework lokal: Model::performUpdate() memanggil fireModelEvent('updated', false); User::observe didaftarkan sekali di AppServiceProvider.
